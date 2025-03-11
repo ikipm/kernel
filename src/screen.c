@@ -9,12 +9,26 @@ unsigned char color = 0x0F; // White and black
 unsigned int cursor_x = 0;
 unsigned int cursor_y = 0;
 
+static void slide_text(const int y) {
+    for (int i = 0; i < VGA_HEIGHT - y; i++) {
+        for (int x = 0; x < VGA_WIDTH; x++) {
+            vga_buffer[i * VGA_WIDTH + x] = vga_buffer[(y + i) * VGA_WIDTH + x];
+        }
+    }
+    for (int i = VGA_HEIGHT-y; i < VGA_HEIGHT; i++) {
+        for (int x = 0; x < VGA_WIDTH; x++) {
+            vga_buffer[i*VGA_WIDTH + x] = 0x20;
+        }
+    }
+    cursor_y -= y;
+}
+
 void change_color(const char bg, const char front) {
     color = (bg << 4) | (front << 4);
 }
 
 void print_char(const char c) {
-    if (cursor_y > VGA_HEIGHT) clear_screen();
+    if (cursor_y >= VGA_HEIGHT) slide_text(1);
     if (c == '\n') {
         cursor_x = 0;
         cursor_y++;
@@ -35,5 +49,12 @@ void clear_screen() {
     cursor_y = 0;
     for (int i = 0; i < VGA_WIDTH*VGA_HEIGHT; i++) {
         vga_buffer[i] = 0x20;
+    }
+}
+
+void clear_character() {
+    if (cursor_x > 0) {
+        cursor_x--;
+        vga_buffer[cursor_y * VGA_WIDTH + cursor_x] = 0x20;
     }
 }

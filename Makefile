@@ -36,3 +36,4 @@ run: kernel.bin
 
 clean:
 	rm -f *.o kernel.bin
+	rm -f commands/*.o

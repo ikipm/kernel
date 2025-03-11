@@ -4,9 +4,9 @@
 
 int help_command() {
     print_string("HELP command. Available commands:\n");
-    print_string("help\n");
-    print_string("echo (Future)\n");
-    print_string("exit (Future)");
+    print_string("help - Print all available commands\n");
+    print_string("exit - Stops the kernel\n");
+    print_string("echo (Future)");
     return 0;
 }
 

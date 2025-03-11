@@ -4,8 +4,6 @@
 
 #define KEYBOARD_DATA_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
-#define ENTER_KEY 0x1C
-#define BACKSPACE 0x0E
 #define MAX_INPUT_SIZE 80
 
 void init_keyboard() {

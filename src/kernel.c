@@ -1,5 +1,4 @@
 #include "screen.h"
-#include "io.h"
 #include "keyboard.h"
 #include "commands.h"
 

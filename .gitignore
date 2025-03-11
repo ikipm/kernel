@@ -52,4 +52,7 @@ Mkfile.old
 dkms.conf
 
 # CLion files
-vcs.xml
+.idea/*.xml
+
+# Kernel
+kernel.bin

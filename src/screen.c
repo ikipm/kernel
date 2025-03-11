@@ -14,6 +14,7 @@ void change_color(const char bg, const char front) {
 }
 
 void print_char(const char c) {
+    if (cursor_y > VGA_HEIGHT) clear_screen();
     if (c == '\n') {
         cursor_x = 0;
         cursor_y++;

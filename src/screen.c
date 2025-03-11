@@ -30,6 +30,8 @@ void print_string(const char *str) {
 }
 
 void clear_screen() {
+    cursor_x = 0;
+    cursor_y = 0;
     for (int i = 0; i < VGA_WIDTH*VGA_HEIGHT; i++) {
         vga_buffer[i] = 0x20;
     }

@@ -2,7 +2,7 @@
 #define KEYBOARD_H
 
 void init_keyboard();
-int get_char();
-void get_string(char *str);
+char get_char();
+char* get_string();
 
 #endif //KEYBOARD_H

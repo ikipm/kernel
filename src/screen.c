@@ -9,7 +9,9 @@ unsigned char color = 0x0F; // White and black
 unsigned int cursor_x = 0;
 unsigned int cursor_y = 0;
 
-static void slide_text(const int y) {
+unsigned int get_cursor_y(){ return cursor_y; }
+
+void slide_text(const int y) {
     for (int i = 0; i < VGA_HEIGHT - y; i++) {
         for (int x = 0; x < VGA_WIDTH; x++) {
             vga_buffer[i * VGA_WIDTH + x] = vga_buffer[(y + i) * VGA_WIDTH + x];

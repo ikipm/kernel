@@ -3,7 +3,7 @@
 
 struct command {
     const char *name;
-    int (*func)();
+    int (*func)(char*, int);
 };
 
 void execute_command(const char *command);

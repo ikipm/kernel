@@ -39,8 +39,7 @@ char* get_string() {
     int i = 0;
     while (current != '\n' && i < MAX_INPUT_SIZE - 1) {
         if (current == -1) {
-            string[i--] = ' ';
-            clear_character();
+            if (clear_character()) string[i--] = ' ';
         } else if (current != 0) {
             string[i++] = current;
             print_char(current);

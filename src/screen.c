@@ -52,9 +52,11 @@ void clear_screen() {
     }
 }
 
-void clear_character() {
-    if (cursor_x > 0) {
+int clear_character() {
+    if (cursor_x > 1) {
         cursor_x--;
         vga_buffer[cursor_y * VGA_WIDTH + cursor_x] = 0x20;
+        return 1;
     }
+    return 0;
 }

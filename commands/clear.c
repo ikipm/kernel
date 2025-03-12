@@ -13,7 +13,7 @@ static int strtoint(char *str) {
 }
 
 int clear_command(char *args[], int max_args) {
-    if (args[1] != " " && strtoint(args[1]) <= get_cursor_y() )slide_text(strtoint(args[1]));
+    if (strtoint(args[1]) != 0 && strtoint(args[1]) <= get_cursor_y() )slide_text(strtoint(args[1]));
     else clear_screen();
     return 0;
 }

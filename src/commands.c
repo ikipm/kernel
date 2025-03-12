@@ -36,7 +36,7 @@ static void parse_command(char *command, char *args[]) {
     }
 }
 
-void execute_command(const char *command) {
+void execute_command(char *command) {
     char *args[MAX_ARGS] = {};
     initialize_commands(args); // Define default value to all elements of the array
     parse_command(command, args); // Split the params

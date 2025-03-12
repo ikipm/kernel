@@ -3,9 +3,9 @@
 
 struct command {
     const char *name;
-    int (*func)(char*, int);
+    int (*func)(char **, int);
 };
 
-void execute_command(const char *command);
+void execute_command(char *command);
 
 #endif //COMMANDS_H

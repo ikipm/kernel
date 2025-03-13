@@ -41,8 +41,12 @@ void print_char(const char c) {
 }
 
 void print_string(const char *str) {
-    while (*str) {
+    while (*str && cursor_x <= VGA_WIDTH) {
         print_char(*str++);
+    }
+    if (cursor_x > VGA_WIDTH) {
+        cursor_x = 0;
+        print_string("\nERROR: Width out of range\n");
     }
 }
 

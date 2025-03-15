@@ -1,4 +1,7 @@
 #include "keyboard.h"
+
+#include <stdint.h>
+
 #include "io.h"
 #include "screen.h"
 
@@ -15,7 +18,7 @@ static int caps_pressed = 0;
 
 static int get_key() {
     while (!(gpvh(KEYBOARD_STATUS_PORT) & 1));
-    const int read_key = gpvh(KEYBOARD_DATA_PORT);
+    const uint8_t read_key = gpvh(KEYBOARD_DATA_PORT);
     if (read_key & 0x80) {
         // In case of shift being released, return to lowercase
         if (read_key == (SHIFT_LEFT | 0x80) || read_key == (SHIFT_RIGHT | 0x80)) {

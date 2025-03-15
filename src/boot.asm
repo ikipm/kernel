@@ -9,7 +9,9 @@ global _start
 extern main            ; Defined in file kernel.c
 _start:
     cli                ; Disable interruptions
+    xor eax, eax       ; Set eax to 0
     mov esp, stack_space + 8192 ; set stack pointer
+    mov ebp, esp       ; Copy Stack Pointer to Base Pointer
     call main          ; Starts C code
     hlt                ; Stop system
 

@@ -14,8 +14,8 @@ static int shift_pressed = 0;
 static int caps_pressed = 0;
 
 static int get_key() {
-    while (!(get_port_value(KEYBOARD_STATUS_PORT) & 1));
-    const int read_key = get_port_value(KEYBOARD_DATA_PORT);
+    while (!(gpvh(KEYBOARD_STATUS_PORT) & 1));
+    const int read_key = gpvh(KEYBOARD_DATA_PORT);
     if (read_key & 0x80) {
         // In case of shift being released, return to lowercase
         if (read_key == (SHIFT_LEFT | 0x80) || read_key == (SHIFT_RIGHT | 0x80)) {

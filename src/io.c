@@ -9,5 +9,6 @@ int get_port_value(int port) {
 }
 
 void set_port_value(int port, int value) {
+    // Write in a port in AT&T syntax assembly
     __asm__ ("outb %%al, %%dx": :"d" (port), "a" (value));
 }

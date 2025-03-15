@@ -6,18 +6,39 @@
 #define KEYBOARD_STATUS_PORT 0x64
 #define MAX_INPUT_SIZE 80
 
-void init_keyboard() {
-}
+// Uppercase
+#define SHIFT_LEFT 0x2A
+#define SHIFT_RIGHT 0x36
+#define CAPS_LOCK 0x3A
+static int shift_pressed = 0;
+static int caps_pressed = 0;
 
 static int get_key() {
     while (!(get_port_value(KEYBOARD_STATUS_PORT) & 1));
-    int read_key = get_port_value(KEYBOARD_DATA_PORT);
-    if (read_key & 0x80) return -1;
+    const int read_key = get_port_value(KEYBOARD_DATA_PORT);
+    if (read_key & 0x80) {
+        // In case of shift being released, return to lowercase
+        if (read_key == (SHIFT_LEFT | 0x80) || read_key == (SHIFT_RIGHT | 0x80)) {
+            shift_pressed = 0;
+        }
+        return -1;
+    }
+
+    // Uppercase keys
+    if (read_key == SHIFT_LEFT || read_key == SHIFT_RIGHT) {
+        shift_pressed = 1;
+        return -1;
+    }
+    if (read_key == CAPS_LOCK) {
+        caps_pressed = !caps_pressed;
+        return -1;
+    }
+
     return read_key;
 }
 
 char get_char() {
-    static const char keyboard_map[] = {
+    static const char lowercase_map[] = {
         0, 0, '1', '2', '3', '4', '5', '6',
         '7', '8', '9', '0', '-', '=', -1, 0,
         'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',
@@ -26,11 +47,23 @@ char get_char() {
         '*', 0, ' '
     };
 
+    static const char uppercase_map[] = {
+        0, 0, '!', '@', '#', '$', '%', '^',
+        '&', '*', '(', ')', '_', '+', -1, 0,
+        'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '{', '}', '\n',
+        0, 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ':', '"', '~',
+        0, '|', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '<', '>', '?', 0,
+        '*', 0, ' '
+    };
+
     int scancode = get_key();
-    if (scancode == -1 || scancode >= (int)sizeof(keyboard_map)) {
+    if (scancode == -1 || scancode >= (int)sizeof(lowercase_map)) {
         return 0;
     }
-    return keyboard_map[scancode];
+
+    // In case of uppercase, return the uppercase value. Otherwise, return the lowercase.
+    int use_uppercase = (shift_pressed ^ caps_pressed);
+    return use_uppercase ? uppercase_map[scancode] : lowercase_map[scancode];
 }
 
 char* get_string() {

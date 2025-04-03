@@ -26,7 +26,7 @@ void slide_text(const int y) {
 }
 
 void change_color(const char bg, const char front) {
-    color = (bg << 4) | (front << 4);
+    color = (bg << 4) | front;
 }
 
 void print_char(const char c) {

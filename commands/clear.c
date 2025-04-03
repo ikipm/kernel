@@ -1,19 +1,10 @@
 #include "clear.h"
 #include <commands.h>
 #include <screen.h>
+#include <functions.h>
 
-static int strtoint(char *str) {
-    int result = 0;
-    while (*str){
-        char c = *str;
-        if ((int) c >= 48 && (int) c <= 57) result = result * 10 + (c - 48);
-        str++;
-    }
-    return result;
-}
-
-int clear_command(char *args[], int max_args) {
-    if (strtoint(args[1]) != 0 && strtoint(args[1]) <= get_cursor_y() )slide_text(strtoint(args[1]));
+int clear_command(char *args[]) {
+    if (str_to_int(args[1]) != 0 && str_to_int(args[1]) <= get_cursor_y() )slide_text(str_to_int(args[1]));
     else clear_screen();
     return 0;
 }

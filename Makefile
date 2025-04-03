@@ -13,6 +13,9 @@ boot.o: src/boot.asm
 kernel.o: src/kernel.c
 	gcc $(CFLAGS) -c src/kernel.c -o kernel.o
 
+functions.o : src/functions.c
+	gcc $(CFLAGS) -c src/functions.c -o functions.o
+
 screen.o: src/screen.c
 	gcc $(CFLAGS) -c src/screen.c -o screen.o
 
@@ -28,7 +31,7 @@ commands.o: src/commands.c
 $(CMDS_DIR)/%.o: $(CMDS_DIR)/%.c
 	gcc $(CFLAGS) -I src/ -c $< -o $@
 
-kernel.bin: boot.o kernel.o screen.o io.o keyboard.o commands.o $(CMDS_OBJ)
+kernel.bin: boot.o kernel.o functions.o screen.o io.o keyboard.o commands.o $(CMDS_OBJ)
 	ld $(LDFLAGS) -o kernel.bin $^
 
 run: kernel.bin

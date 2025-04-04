@@ -4,6 +4,8 @@
 #include <functions.h>
 
 int clear_command(char *args[]) {
+    if (is_number(args[1])) return 1;
+
     if (str_to_int(args[1]) != 0 && str_to_int(args[1]) <= get_cursor_y() )slide_text(str_to_int(args[1]));
     else clear_screen();
     return 0;

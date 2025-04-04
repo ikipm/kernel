@@ -31,3 +31,13 @@ char *int_to_str(int n) {
 
     return result;
 }
+
+char is_number(char *str) {
+    char is_num = 1;
+    while (*str && is_num) {
+        char c = *str;
+        if (!(c >= '0' && c <= '9')) is_num = 0;
+        str++;
+    }
+    return is_num;
+}

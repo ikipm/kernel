@@ -7,6 +7,7 @@ void slide_text(const int y);
 void change_color(const char bg, const char front);
 void print_char(const char c);
 void print_string(const char *message);
+void print_int(const int n);
 void clear_screen();
 int clear_character();
 

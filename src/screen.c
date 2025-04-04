@@ -1,4 +1,5 @@
 #include "screen.h"
+#include "functions.h"
 
 #define VGA_WIDTH 80
 #define VGA_HEIGHT 25
@@ -48,6 +49,10 @@ void print_string(const char *str) {
         cursor_x = 0;
         print_string("\nERROR: Width out of range\n");
     }
+}
+
+void print_int(const int num) {
+    print_string(int_to_str(num));
 }
 
 void clear_screen() {

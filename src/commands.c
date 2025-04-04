@@ -42,7 +42,9 @@ void execute_command(char *command) {
     parse_command(command, args); // Split the params
     for (struct command *cmd = __start_commands; cmd < __stop_commands; cmd++) {
         if (check_command(args[0], cmd->name)){
-            cmd->func(args, MAX_ARGS);
+            if (cmd->func(args, MAX_ARGS) != 0) {
+                print_string("Command can't be executed.\n");
+            }
             return;
         }
     }

@@ -1,12 +1,11 @@
 #include "sum.h"
 #include <screen.h>
 #include <commands.h>
-#include <functions.h>
 
 int sum_command(char *args[]){
   int n1 = str_to_int(args[1]), n2 = str_to_int(args[2]);
   print_char('\n');
-  print_string(int_to_str(n1 + n2));
+  print_int(n1+n2);
   return 0;
 }
 

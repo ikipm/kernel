@@ -3,7 +3,7 @@
 #include <commands.h>
 #include <functions.h>
 
-int operation_command(char *args[]){
+int operation_command(char *args[], int k){
   double result = str_to_int(args[1]), part = 0;
   char op = ' ';
   for(int i = 2; args[i]; i++){

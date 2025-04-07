@@ -1,6 +1,6 @@
 #ifndef OPERATION_H
 #define OPERATION_H
 
-int operation_command(char *args[]);
+int operation_command(char *args[], int i);
 
 #endif
